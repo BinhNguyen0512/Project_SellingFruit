@@ -5,9 +5,10 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
 
 //Routes
-const userRoutes = require('./routes/user')
+const authRoutes = require('./routes/auth')
+const adminRoutes = require('./routes/admin/auth')
 
-//environment variable or you can say constants
+//environment variable or you can say constantss
 env.config();
 
 //mongoDB connection
@@ -19,7 +20,8 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO
 
 
 app.use(bodyParser.json());
-app.use('/api', userRoutes)
+app.use('/api', authRoutes);
+app.use('/api', adminRoutes);
 
 app.listen(process.env.PORT, () =>{
     console.log(`Server is running on port ${process.env.PORT}`);
